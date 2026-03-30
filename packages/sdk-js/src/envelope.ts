@@ -1,3 +1,9 @@
+/**
+ * Create and sign OpenPassport message envelopes.
+ *
+ * Every agent-to-agent message is wrapped in a signed envelope
+ * that includes a timestamp and nonce for replay protection.
+ */
 import { canonicalize, type Envelope } from "@openpassport/spec";
 import { base64UrlEncode, sign } from "./keys.js";
 
@@ -12,6 +18,7 @@ export async function createEnvelope(
   options: CreateEnvelopeOptions,
   privateKey: Uint8Array,
 ): Promise<Envelope> {
+  // 128-bit random hex nonce for replay protection
   const nonce = Array.from(crypto.getRandomValues(new Uint8Array(16)))
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("");

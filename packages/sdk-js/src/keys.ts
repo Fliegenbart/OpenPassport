@@ -1,6 +1,13 @@
+/**
+ * Ed25519 key generation, signing, and verification.
+ *
+ * Uses @noble/ed25519 (audited, pure JS) with Web Crypto SHA-512.
+ * All keys are 32 bytes. All signatures are 64 bytes.
+ * Encoding uses base64url without padding (RFC 4648 §5).
+ */
 import * as ed from "@noble/ed25519";
 
-// Configure ed25519 to use Web Crypto SHA-512
+// Configure @noble/ed25519 to use the Web Crypto SHA-512 implementation.
 ed.etc.sha512Async = async (...messages: Uint8Array[]): Promise<Uint8Array> => {
   const merged = concatBytes(...messages);
   const hash = await globalThis.crypto.subtle.digest("SHA-512", merged as unknown as BufferSource);

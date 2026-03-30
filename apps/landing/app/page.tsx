@@ -2,6 +2,25 @@ import { FadeIn } from "./components/FadeIn";
 import { PassportCard } from "./components/PassportCard";
 import { Terminal } from "./components/Terminal";
 import { StampMark } from "./components/Stamp";
+import { DecoStamps } from "./components/DecoStamps";
+
+function SectionNumber({ page, total = 9 }: { page: number; total?: number }) {
+  return (
+    <span className="absolute top-6 right-6 text-[9px] text-fg/[0.08] tracking-[0.3em] uppercase font-[family-name:var(--font-mono)] pointer-events-none select-none">
+      Page {String(page).padStart(2, "0")} / {String(total).padStart(2, "0")}
+    </span>
+  );
+}
+
+function Checkpoint({ label }: { label: string }) {
+  return (
+    <div className="max-w-4xl mx-auto px-6 py-6">
+      <div className="checkpoint-divider">
+        <span>{label}</span>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -18,6 +37,13 @@ export default function Home() {
           }}
         />
 
+        {/* Watermark */}
+        <span className="watermark top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-[8deg]">
+          Passport
+        </span>
+
+        <SectionNumber page={1} />
+
         <FadeIn className="text-center max-w-3xl relative z-10">
           {/* Tiny label */}
           <div className="mb-8">
@@ -27,7 +53,7 @@ export default function Home() {
           </div>
 
           {/* Main title */}
-          <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight mb-6 font-[family-name:var(--font-display)]">
+          <h1 className="text-5xl sm:text-7xl md:text-8xl font-normal tracking-tight mb-6 font-[family-name:var(--font-display)]">
             Open
             <span className="text-verified">Passport</span>
           </h1>
@@ -82,7 +108,8 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ PROBLEM ═══════════════ */}
-      <section className="py-32 px-6">
+      <section className="py-32 px-6 relative">
+        <SectionNumber page={2} />
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
             <p className="text-2xl sm:text-3xl md:text-4xl font-light leading-snug text-fg/90">
@@ -115,19 +142,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════ DIVIDER ═══════════════ */}
-      <div className="flex justify-center py-4">
-        <div className="w-24 h-px bg-border" />
-      </div>
+      <Checkpoint label="Checkpoint" />
 
       {/* ═══════════════ SOLUTION — 4 PRIMITIVES ═══════════════ */}
-      <section className="py-32 px-6">
+      <section className="py-32 px-6 relative">
+        <SectionNumber page={3} />
+        <DecoStamps
+          stamps={[
+            { text: "ENTRY 2026-03-15", rotate: -12, top: "8%", left: "3%" },
+            { text: "TRANSIT APPROVED", rotate: 8, top: "65%", right: "2%" },
+          ]}
+        />
         <div className="max-w-4xl mx-auto">
           <FadeIn className="text-center mb-20">
             <p className="text-[10px] tracking-[0.35em] uppercase text-muted mb-4">
               The Standard
             </p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-display)]">
+            <h2 className="text-3xl sm:text-4xl font-normal font-[family-name:var(--font-display)]">
               Four primitives. Nothing more.
             </h2>
           </FadeIn>
@@ -182,14 +213,17 @@ export default function Home() {
         </div>
       </section>
 
+      <Checkpoint label="Document Check" />
+
       {/* ═══════════════ PASSPORT CARD ═══════════════ */}
-      <section className="py-24 px-6">
+      <section className="py-24 px-6 relative">
+        <SectionNumber page={4} />
         <div className="max-w-4xl mx-auto">
           <FadeIn className="text-center mb-16">
             <p className="text-[10px] tracking-[0.35em] uppercase text-muted mb-4">
               The Document
             </p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-display)]">
+            <h2 className="text-3xl sm:text-4xl font-normal font-[family-name:var(--font-display)]">
               Machine-readable identity
             </h2>
           </FadeIn>
@@ -198,14 +232,21 @@ export default function Home() {
         </div>
       </section>
 
+      <Checkpoint label="Border Control" />
+
       {/* ═══════════════ TERMINAL DEMO ═══════════════ */}
-      <section className="py-32 px-6 bg-surface/50">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-32 px-6 bg-surface/50 relative overflow-hidden">
+        <SectionNumber page={5} />
+        {/* Watermark */}
+        <span className="watermark top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[5deg]">
+          Border Control
+        </span>
+        <div className="max-w-4xl mx-auto relative z-10">
           <FadeIn className="text-center mb-16">
             <p className="text-[10px] tracking-[0.35em] uppercase text-muted mb-4">
               See It Work
             </p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-display)]">
+            <h2 className="text-3xl sm:text-4xl font-normal font-[family-name:var(--font-display)]">
               Verify. Reject. Trust.
             </h2>
           </FadeIn>
@@ -214,14 +255,17 @@ export default function Home() {
         </div>
       </section>
 
+      <Checkpoint label="Processing" />
+
       {/* ═══════════════ QUICK START ═══════════════ */}
-      <section className="py-32 px-6">
+      <section className="py-32 px-6 relative">
+        <SectionNumber page={6} />
         <div className="max-w-2xl mx-auto">
           <FadeIn className="text-center mb-16">
             <p className="text-[10px] tracking-[0.35em] uppercase text-muted mb-4">
               3 Minutes
             </p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-display)]">
+            <h2 className="text-3xl sm:text-4xl font-normal font-[family-name:var(--font-display)]">
               Try it now
             </h2>
           </FadeIn>
@@ -250,13 +294,20 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ HOW IT WORKS ═══════════════ */}
-      <section className="py-32 px-6 bg-surface/50">
-        <div className="max-w-3xl mx-auto">
+      <section className="py-32 px-6 bg-surface/50 relative overflow-hidden">
+        <SectionNumber page={7} />
+        <DecoStamps
+          stamps={[
+            { text: "EXIT CLEARED", rotate: 15, top: "12%", right: "4%" },
+            { text: "VERIFIED 2026", rotate: -6, top: "75%", left: "2%" },
+          ]}
+        />
+        <div className="max-w-3xl mx-auto relative z-10">
           <FadeIn className="text-center mb-16">
             <p className="text-[10px] tracking-[0.35em] uppercase text-muted mb-4">
               Protocol
             </p>
-            <h2 className="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-display)]">
+            <h2 className="text-3xl sm:text-4xl font-normal font-[family-name:var(--font-display)]">
               How it works
             </h2>
           </FadeIn>
@@ -281,15 +332,18 @@ export default function Home() {
         </div>
       </section>
 
+      <Checkpoint label="Clearance" />
+
       {/* ═══════════════ DIFFERENTIATOR ═══════════════ */}
-      <section className="py-32 px-6">
+      <section className="py-32 px-6 relative">
+        <SectionNumber page={8} />
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
-            <p className="text-2xl sm:text-3xl md:text-4xl font-light leading-snug">
+            <p className="text-2xl sm:text-3xl md:text-4xl font-light leading-snug font-[family-name:var(--font-display)]">
               Others govern what agents{" "}
-              <span className="text-muted">do</span>.
+              <span className="text-muted italic">do</span>.
             </p>
-            <p className="text-2xl sm:text-3xl md:text-4xl font-bold mt-2">
+            <p className="text-2xl sm:text-3xl md:text-4xl font-normal mt-2 font-[family-name:var(--font-display)]">
               OpenPassport establishes who they{" "}
               <span className="text-verified">are</span>.
             </p>
@@ -304,10 +358,12 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ NOT ═══════════════ */}
-      <section className="py-24 px-6 bg-surface/50">
+      <section className="py-24 px-6 bg-surface/50 relative">
         <div className="max-w-2xl mx-auto">
           <FadeIn className="text-center mb-12">
-            <h2 className="text-xl font-bold">OpenPassport is not</h2>
+            <h2 className="text-xl font-normal font-[family-name:var(--font-display)]">
+              OpenPassport is <em>not</em>
+            </h2>
           </FadeIn>
 
           <FadeIn delay={0.1}>
@@ -332,7 +388,7 @@ export default function Home() {
           </FadeIn>
 
           <FadeIn delay={0.3} className="text-center mt-8">
-            <p className="text-sm text-muted">
+            <p className="text-sm text-muted italic font-[family-name:var(--font-display)]">
               The less we try to be, the bigger this can become.
             </p>
           </FadeIn>
@@ -340,13 +396,14 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ PACKAGES ═══════════════ */}
-      <section className="py-32 px-6">
+      <section className="py-32 px-6 relative">
+        <SectionNumber page={9} />
         <div className="max-w-3xl mx-auto">
           <FadeIn className="text-center mb-16">
             <p className="text-[10px] tracking-[0.35em] uppercase text-muted mb-4">
               Ecosystem
             </p>
-            <h2 className="text-3xl font-bold font-[family-name:var(--font-display)]">
+            <h2 className="text-3xl font-normal font-[family-name:var(--font-display)]">
               Packages
             </h2>
           </FadeIn>
@@ -396,10 +453,20 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ CTA ═══════════════ */}
-      <section className="py-32 px-6">
-        <div className="max-w-2xl mx-auto text-center">
+      <section className="py-32 px-6 relative overflow-hidden">
+        {/* Watermark */}
+        <span className="watermark top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-[4deg]">
+          Cleared
+        </span>
+        <DecoStamps
+          stamps={[
+            { text: "APPROVED", rotate: -18, top: "15%", left: "5%" },
+            { text: "ENTRY 2026", rotate: 10, top: "70%", right: "3%" },
+          ]}
+        />
+        <div className="max-w-2xl mx-auto text-center relative z-10">
           <FadeIn>
-            <h2 className="text-4xl sm:text-5xl font-bold font-[family-name:var(--font-display)] mb-6">
+            <h2 className="text-4xl sm:text-5xl font-normal font-[family-name:var(--font-display)] mb-6">
               Every agent should
               <br />
               carry a passport.
@@ -432,6 +499,15 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
+
+      {/* ═══════════════ MRZ BAND ═══════════════ */}
+      <div className="py-4 px-6 overflow-hidden select-none pointer-events-none">
+        <div className="text-[8px] text-fg/[0.06] tracking-[0.15em] font-[family-name:var(--font-mono)] leading-relaxed text-center whitespace-nowrap">
+          P&lt;OPN&lt;OPENPASSPORT&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+          <br />
+          AP951173AACF55464D&lt;&lt;&lt;&lt;&lt;&lt;&lt;8AA5C29CEEEE993C&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+        </div>
+      </div>
 
       {/* ═══════════════ FOOTER ═══════════════ */}
       <footer className="border-t border-border py-12 px-6">

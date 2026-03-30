@@ -1,5 +1,8 @@
+/**
+ * Create and sign OpenPassport passport documents.
+ */
 import { canonicalize, type Passport } from "@openpassport/spec";
-import { generateKeyPair, publicKeyToBase64Url, base64UrlEncode, sign } from "./keys.js";
+import { publicKeyToBase64Url, base64UrlEncode, sign } from "./keys.js";
 
 export interface CreatePassportOptions {
   name: string;
@@ -28,6 +31,7 @@ export async function createPassport(
     publicKey: publicKeyToBase64Url(publicKey),
     endpoint: options.endpoint,
     capabilities: options.capabilities,
+    // Strip milliseconds for spec compliance (ISO 8601 seconds precision)
     issuedAt: now.toISOString().replace(/\.\d{3}Z$/, "Z"),
     expiresAt: expiresAt.toISOString().replace(/\.\d{3}Z$/, "Z"),
     attestations: [],

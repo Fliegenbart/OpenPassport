@@ -12,16 +12,18 @@ export function VerifiedStamp({ delay = 0 }: { delay?: number }) {
       {inView && (
         <motion.div
           initial={{ scale: 3, rotate: -15, opacity: 0 }}
-          animate={{ scale: 1, rotate: -4, opacity: 1 }}
+          animate={{ scale: 1, rotate: -4, opacity: 0.9 }}
           transition={{
             duration: 0.4,
             delay,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="border-3 border-verified text-verified px-6 py-3 font-bold text-lg tracking-widest uppercase rounded-sm"
+          className="px-6 py-3 font-bold text-lg tracking-widest uppercase rounded-sm"
           style={{
+            border: "3px solid rgba(34, 197, 94, 0.8)",
+            boxShadow: "0 0 30px rgba(34, 197, 94, 0.1), inset 0 0 0 1px rgba(34, 197, 94, 0.3)",
+            color: "rgba(34, 197, 94, 0.85)",
             textShadow: "0 0 20px rgba(34, 197, 94, 0.3)",
-            boxShadow: "0 0 30px rgba(34, 197, 94, 0.1)",
           }}
         >
           ENTRY GRANTED
@@ -40,16 +42,18 @@ export function RejectedStamp({ delay = 0 }: { delay?: number }) {
       {inView && (
         <motion.div
           initial={{ scale: 3, rotate: 8, opacity: 0 }}
-          animate={{ scale: 1, rotate: 3, opacity: 1 }}
+          animate={{ scale: 1, rotate: 3, opacity: 0.9 }}
           transition={{
             duration: 0.4,
             delay,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="border-3 border-rejected text-rejected px-6 py-3 font-bold text-lg tracking-widest uppercase rounded-sm"
+          className="px-6 py-3 font-bold text-lg tracking-widest uppercase rounded-sm"
           style={{
+            border: "3px solid rgba(239, 68, 68, 0.8)",
+            boxShadow: "0 0 30px rgba(239, 68, 68, 0.1), inset 0 0 0 1px rgba(239, 68, 68, 0.3)",
+            color: "rgba(239, 68, 68, 0.85)",
             textShadow: "0 0 20px rgba(239, 68, 68, 0.3)",
-            boxShadow: "0 0 30px rgba(239, 68, 68, 0.1)",
           }}
         >
           ENTRY DENIED
@@ -75,19 +79,22 @@ export function StampMark({
 
   const colorMap = {
     verified: {
-      border: "border-verified",
-      text: "text-verified",
+      border: "rgba(34, 197, 94, 0.7)",
+      text: "rgba(34, 197, 94, 0.75)",
       glow: "rgba(34, 197, 94, 0.15)",
+      inner: "rgba(34, 197, 94, 0.25)",
     },
     rejected: {
-      border: "border-rejected",
-      text: "text-rejected",
+      border: "rgba(239, 68, 68, 0.7)",
+      text: "rgba(239, 68, 68, 0.75)",
       glow: "rgba(239, 68, 68, 0.15)",
+      inner: "rgba(239, 68, 68, 0.25)",
     },
     warning: {
-      border: "border-warning",
-      text: "text-warning",
+      border: "rgba(234, 179, 8, 0.7)",
+      text: "rgba(234, 179, 8, 0.75)",
       glow: "rgba(234, 179, 8, 0.15)",
+      inner: "rgba(234, 179, 8, 0.25)",
     },
   };
 
@@ -98,14 +105,18 @@ export function StampMark({
       {inView && (
         <motion.span
           initial={{ scale: 2.5, rotate: rotate * 2, opacity: 0 }}
-          animate={{ scale: 1, rotate, opacity: 1 }}
+          animate={{ scale: 1, rotate, opacity: 0.9 }}
           transition={{
             duration: 0.35,
             delay,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className={`inline-block border-2 ${c.border} ${c.text} px-3 py-1 text-xs font-bold tracking-widest uppercase rounded-sm`}
-          style={{ boxShadow: `0 0 20px ${c.glow}` }}
+          className="inline-block px-3 py-1 text-xs font-bold tracking-widest uppercase rounded-sm"
+          style={{
+            border: `2px solid ${c.border}`,
+            boxShadow: `0 0 20px ${c.glow}, inset 0 0 0 1px ${c.inner}`,
+            color: c.text,
+          }}
         >
           {children}
         </motion.span>

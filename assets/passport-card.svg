@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 320" fill="none">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
+      .mono { font-family: 'JetBrains Mono', monospace; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="520" height="320" rx="6" fill="#0a0a0a" stroke="#1a1a1a" stroke-width="1"/>
+
+  <!-- Header bar -->
+  <rect x="0" y="0" width="520" height="40" rx="6" fill="#111"/>
+  <rect x="0" y="34" width="520" height="6" fill="#111"/>
+  <rect x="0" y="40" width="520" height="1" fill="#1a1a1a"/>
+  <circle cx="24" cy="20" r="5" fill="none" stroke="#22c55e" stroke-width="1" opacity="0.5"/>
+  <text x="42" y="24" class="mono" fill="#555" font-size="9" letter-spacing="2">AGENT PASSPORT</text>
+  <text x="470" y="24" class="mono" fill="#22c55e" font-size="9" font-weight="700" letter-spacing="1">VERIFIED</text>
+
+  <!-- Passport fields -->
+  <text x="24" y="72" class="mono" fill="#444" font-size="11">"openpassport":</text>
+  <text x="190" y="72" class="mono" fill="#888" font-size="11">"0.1.0"</text>
+
+  <text x="24" y="96" class="mono" fill="#444" font-size="11">"id":</text>
+  <text x="190" y="96" class="mono" fill="#888" font-size="11">"ap_951173aa-cf55-464d..."</text>
+
+  <text x="24" y="120" class="mono" fill="#444" font-size="11">"name":</text>
+  <text x="190" y="120" class="mono" fill="#e8e8e8" font-size="11" font-weight="700">"ResearchBot"</text>
+
+  <text x="24" y="144" class="mono" fill="#444" font-size="11">"issuer":</text>
+  <text x="190" y="144" class="mono" fill="#888" font-size="11">"https://acme.ai"</text>
+
+  <text x="24" y="168" class="mono" fill="#444" font-size="11">"publicKey":</text>
+  <text x="190" y="168" class="mono" fill="#666" font-size="11">"dGhpcyBpcyBhIGJh..."</text>
+
+  <text x="24" y="192" class="mono" fill="#444" font-size="11">"capabilities":</text>
+  <text x="190" y="192" class="mono" fill="#22c55e" font-size="11" opacity="0.8">["web-search", "summarize"]</text>
+
+  <text x="24" y="216" class="mono" fill="#444" font-size="11">"attestations":</text>
+  <text x="190" y="216" class="mono" fill="#888" font-size="11">[{org: "acme-corp"}]</text>
+
+  <text x="24" y="240" class="mono" fill="#444" font-size="11">"signature":</text>
+  <text x="190" y="240" class="mono" fill="#444" font-size="11">"Ed25519..."</text>
+
+  <!-- SIGNED stamp -->
+  <g transform="translate(430, 120) rotate(-6)">
+    <rect x="-52" y="-18" width="104" height="36" rx="2" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+    <text x="0" y="6" text-anchor="middle" class="mono" fill="#22c55e" font-size="16" font-weight="700" letter-spacing="3">SIGNED</text>
+  </g>
+
+  <!-- Footer -->
+  <rect x="0" y="270" width="520" height="1" fill="#1a1a1a"/>
+  <text x="24" y="296" class="mono" fill="#333" font-size="9" letter-spacing="2">/.well-known/passport.json</text>
+  <text x="446" y="296" class="mono" fill="#333" font-size="9">Ed25519</text>
+</svg>

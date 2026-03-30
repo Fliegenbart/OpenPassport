@@ -2,7 +2,7 @@
 
 @theme {
   --font-mono: "JetBrains Mono", "SF Mono", "Fira Code", ui-monospace, monospace;
-  --font-display: "Space Grotesk", "JetBrains Mono", ui-monospace, monospace;
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
 
   --color-bg: #050505;
   --color-fg: #e8e8e8;
@@ -25,10 +25,18 @@
 }
 
 @font-face {
-  font-family: "Space Grotesk";
-  src: url("https://fonts.gstatic.com/s/spacegrotesk/v16/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2") format("woff2");
-  font-weight: 300 700;
+  font-family: "Instrument Serif";
+  src: url("https://fonts.gstatic.com/s/instrumentserif/v4/jizBRFtNs2ka5fXjeivQ4LroWlx-2zIZj1bIkNo.woff2") format("woff2");
+  font-weight: 400;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("https://fonts.gstatic.com/s/instrumentserif/v4/jizHRFtNs2ka5fXjeivQ4LroWlx-6zATi3TNgNq0dw.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -139,4 +147,49 @@ body {
 @keyframes typing {
   from { width: 0; }
   to { width: 100%; }
+}
+
+/* Checkpoint-style section divider */
+.checkpoint-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-muted);
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+}
+.checkpoint-divider::before,
+.checkpoint-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-border) 0px,
+    var(--color-border) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+/* Large background watermark text */
+.watermark {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 15vw, 12rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.015);
+  pointer-events: none;
+  user-select: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+/* Passport page dashed border */
+.passport-border {
+  border-style: dashed;
+  border-color: var(--color-border);
 }

@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" fill="none">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
+      .mono { font-family: 'JetBrains Mono', monospace; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="540" fill="#050505"/>
+
+  <!-- Subtle grid -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="0.3" opacity="0.04"/>
+  </pattern>
+  <rect width="960" height="540" fill="url(#grid)"/>
+
+  <!-- Center divider line -->
+  <line x1="480" y1="80" x2="480" y2="460" stroke="#222" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- ════════ LEFT SIDE: DENIED ════════ -->
+
+  <!-- Left header -->
+  <text x="240" y="56" text-anchor="middle" class="mono" fill="#555" font-size="10" letter-spacing="3">SCENARIO A</text>
+
+  <!-- Terminal box -->
+  <rect x="40" y="80" width="400" height="340" rx="4" fill="#0a0a0a" stroke="#1a1a1a" stroke-width="1"/>
+
+  <!-- Terminal header -->
+  <rect x="40" y="80" width="400" height="32" rx="4" fill="#111"/>
+  <rect x="40" y="108" width="400" height="4" fill="#0a0a0a"/>
+  <circle cx="60" cy="96" r="5" fill="#333"/>
+  <circle cx="76" cy="96" r="5" fill="#333"/>
+  <circle cx="92" cy="96" r="5" fill="#333"/>
+  <text x="240" y="100" text-anchor="middle" class="mono" fill="#444" font-size="10">unknown-agent</text>
+
+  <!-- Terminal content -->
+  <text x="60" y="140" class="mono" fill="#888" font-size="12">$ agent request --action transfer</text>
+  <text x="60" y="164" class="mono" fill="#555" font-size="12">  amount: $50,000</text>
+  <text x="60" y="188" class="mono" fill="#555" font-size="12">  to: external-wallet-0x8f...</text>
+
+  <text x="60" y="224" class="mono" fill="#555" font-size="12">Checking identity...</text>
+  <text x="60" y="248" class="mono" fill="#555" font-size="12">Fetching /.well-known/passport.json</text>
+
+  <text x="60" y="284" class="mono" fill="#ef4444" font-size="12" font-weight="700">✗ No passport found</text>
+  <text x="60" y="308" class="mono" fill="#ef4444" font-size="12" font-weight="700">✗ Agent identity unknown</text>
+  <text x="60" y="332" class="mono" fill="#ef4444" font-size="12" font-weight="700">✗ Request blocked</text>
+
+  <text x="60" y="368" class="mono" fill="#666" font-size="11">Unknown agent? No entry.</text>
+
+  <!-- DENIED stamp -->
+  <g transform="translate(300, 280) rotate(6)">
+    <rect x="-90" y="-28" width="180" height="56" rx="3" fill="none" stroke="#ef4444" stroke-width="3"/>
+    <text x="0" y="8" text-anchor="middle" class="mono" fill="#ef4444" font-size="24" font-weight="700" letter-spacing="4">DENIED</text>
+  </g>
+
+  <!-- Left bottom label -->
+  <text x="240" y="448" text-anchor="middle" class="mono" fill="#ef4444" font-size="13" font-weight="700" letter-spacing="2">ANONYMOUS AGENT</text>
+  <text x="240" y="468" text-anchor="middle" class="mono" fill="#555" font-size="11">no passport · no identity · no entry</text>
+
+
+  <!-- ════════ RIGHT SIDE: GRANTED ════════ -->
+
+  <!-- Right header -->
+  <text x="720" y="56" text-anchor="middle" class="mono" fill="#555" font-size="10" letter-spacing="3">SCENARIO B</text>
+
+  <!-- Terminal box -->
+  <rect x="520" y="80" width="400" height="340" rx="4" fill="#0a0a0a" stroke="#1a1a1a" stroke-width="1"/>
+
+  <!-- Terminal header -->
+  <rect x="520" y="80" width="400" height="32" rx="4" fill="#111"/>
+  <rect x="520" y="108" width="400" height="4" fill="#0a0a0a"/>
+  <circle cx="540" cy="96" r="5" fill="#333"/>
+  <circle cx="556" cy="96" r="5" fill="#333"/>
+  <circle cx="572" cy="96" r="5" fill="#333"/>
+  <text x="720" y="100" text-anchor="middle" class="mono" fill="#444" font-size="10">verified-agent</text>
+
+  <!-- Terminal content -->
+  <text x="540" y="140" class="mono" fill="#888" font-size="12">$ agent request --action transfer</text>
+  <text x="540" y="164" class="mono" fill="#555" font-size="12">  amount: $50,000</text>
+  <text x="540" y="188" class="mono" fill="#555" font-size="12">  to: treasury-0x4a...</text>
+
+  <text x="540" y="224" class="mono" fill="#555" font-size="12">Checking identity...</text>
+  <text x="540" y="248" class="mono" fill="#555" font-size="12">Fetching /.well-known/passport.json</text>
+
+  <text x="540" y="284" class="mono" fill="#22c55e" font-size="12" font-weight="700">✓ Passport verified (Ed25519)</text>
+  <text x="540" y="308" class="mono" fill="#22c55e" font-size="12" font-weight="700">✓ Issuer: acme.ai</text>
+  <text x="540" y="332" class="mono" fill="#22c55e" font-size="12" font-weight="700">✓ Capability: payment.initiate</text>
+
+  <text x="540" y="368" class="mono" fill="#666" font-size="11">Identity confirmed. Request accepted.</text>
+
+  <!-- GRANTED stamp -->
+  <g transform="translate(780, 280) rotate(-4)">
+    <rect x="-90" y="-28" width="180" height="56" rx="3" fill="none" stroke="#22c55e" stroke-width="3"/>
+    <text x="0" y="8" text-anchor="middle" class="mono" fill="#22c55e" font-size="22" font-weight="700" letter-spacing="3">GRANTED</text>
+  </g>
+
+  <!-- Right bottom label -->
+  <text x="720" y="448" text-anchor="middle" class="mono" fill="#22c55e" font-size="13" font-weight="700" letter-spacing="2">PASSPORT HOLDER</text>
+  <text x="720" y="468" text-anchor="middle" class="mono" fill="#555" font-size="11">signed · verified · trusted</text>
+
+  <!-- ════════ BOTTOM ════════ -->
+  <line x1="80" y1="496" x2="880" y2="496" stroke="#1a1a1a" stroke-width="1"/>
+  <text x="480" y="524" text-anchor="middle" class="mono" fill="#333" font-size="11" letter-spacing="2">OPENPASSPORT — THE PASSPORT STANDARD FOR AI AGENTS</text>
+</svg>
