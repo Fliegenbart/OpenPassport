@@ -1,0 +1,8 @@
+{
+  "name": "@openpassport/example-basic-handshake",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@openpassport/sdk": "workspace:*"
+  }
+}

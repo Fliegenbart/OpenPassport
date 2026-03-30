@@ -1,0 +1,8 @@
+{
+  "name": "@openpassport/example-trusted-agent",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@openpassport/sdk": "workspace:*"
+  }
+}

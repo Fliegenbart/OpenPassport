@@ -1,0 +1,6 @@
+{
+  "name": "@openpassport/passport-inspector",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Web-based passport inspector for OpenPassport"
+}

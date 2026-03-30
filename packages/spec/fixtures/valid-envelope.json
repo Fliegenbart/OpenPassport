@@ -1,0 +1,11 @@
+{
+  "openpassport_message": "0.1.0",
+  "from": "ap_f4430dd2-16e1-487e-bf2a-73a896b24f4d",
+  "passportUrl": "https://fixture.example.com/.well-known/passport.json",
+  "timestamp": "2026-03-30T13:16:27Z",
+  "nonce": "bf97a9e828c21eddbebab996d3b3f10e",
+  "body": {
+    "text": "Hello from fixture"
+  },
+  "signature": "yEx8ISLzAcuYo8TyMOoqEloCrJuCIzxbMr-VE02eZUlny4wepbgL_lzr66ge8r7a6mAlUAII5qrAGaHK7wrpCg"
+}

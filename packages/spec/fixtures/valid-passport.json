@@ -1,0 +1,16 @@
+{
+  "openpassport": "0.1.0",
+  "id": "ap_f4430dd2-16e1-487e-bf2a-73a896b24f4d",
+  "name": "FixtureBot",
+  "issuer": "https://fixture.example.com",
+  "publicKey": "TCppHdKRe3vUmYkGUi9F_2_zW1uOot-n_4hgDEsAZyc",
+  "endpoint": "https://fixture.example.com/agent",
+  "capabilities": [
+    "web-search",
+    "summarize"
+  ],
+  "issuedAt": "2026-03-30T13:16:27Z",
+  "expiresAt": "2027-03-30T13:16:27Z",
+  "attestations": [],
+  "signature": "w77146r3F3Q6xNm0THmblpDNidSHwZTHQ8SUzkcx3mqomYeKPtNDk2LEy5pXckG2fa6HVBKWUH7MvqRCN4EXDA"
+}

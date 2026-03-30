@@ -1,0 +1,23 @@
+{
+  "name": "openpassport",
+  "version": "0.1.0",
+  "description": "CLI for OpenPassport — create, verify, and inspect agent passports",
+  "type": "module",
+  "bin": {
+    "openpassport": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo 'no tests yet'"
+  },
+  "dependencies": {
+    "@openpassport/sdk": "workspace:*",
+    "commander": "^13.1.0",
+    "picocolors": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "typescript": "^5.7.0"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenPassport Inspector</title>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --fg: #e0e0e0;
+      --muted: #666;
+      --green: #22c55e;
+      --red: #ef4444;
+      --border: #333;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      background: var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 1rem;
+    }
+    h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+    .subtitle { color: var(--muted); margin-bottom: 2rem; font-size: 0.875rem; }
+    .input-row {
+      display: flex;
+      gap: 0.5rem;
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+    input {
+      flex: 1;
+      background: #111;
+      border: 1px solid var(--border);
+      color: var(--fg);
+      padding: 0.75rem 1rem;
+      font-family: inherit;
+      font-size: 0.875rem;
+      border-radius: 4px;
+    }
+    input:focus { outline: none; border-color: #555; }
+    button {
+      background: #222;
+      border: 1px solid var(--border);
+      color: var(--fg);
+      padding: 0.75rem 1.5rem;
+      font-family: inherit;
+      font-size: 0.875rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover { background: #333; }
+    #result {
+      width: 100%;
+      max-width: 600px;
+    }
+    .passport-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      background: #111;
+    }
+    .passport-card .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .passport-card .header h2 { font-size: 1rem; }
+    .stamp {
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .stamp.verified { border: 2px solid var(--green); color: var(--green); }
+    .stamp.rejected { border: 2px solid var(--red); color: var(--red); }
+    .field { margin-bottom: 0.5rem; }
+    .field .label { color: var(--muted); font-size: 0.75rem; }
+    .field .value { font-size: 0.875rem; word-break: break-all; }
+    .capabilities { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.25rem; }
+    .cap-tag {
+      background: #1a1a1a;
+      border: 1px solid var(--border);
+      padding: 0.125rem 0.5rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+    }
+    .error { color: var(--red); margin-top: 1rem; font-size: 0.875rem; }
+    .loading { color: var(--muted); text-align: center; padding: 2rem; }
+  </style>
+</head>
+<body>
+  <h1>OpenPassport Inspector</h1>
+  <p class="subtitle">Paste a passport URL to inspect and verify</p>
+
+  <div class="input-row">
+    <input type="text" id="url" placeholder="https://example.com/.well-known/passport.json" />
+    <button onclick="inspect()">Inspect</button>
+  </div>
+
+  <div id="result"></div>
+
+  <script>
+    async function inspect() {
+      const url = document.getElementById('url').value.trim();
+      const result = document.getElementById('result');
+      if (!url) return;
+
+      result.innerHTML = '<div class="loading">Fetching passport...</div>';
+
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const passport = await res.json();
+
+        // Basic validation
+        const errors = [];
+        if (passport.openpassport !== '0.1.0') errors.push('Invalid spec version');
+        if (!passport.id?.startsWith('ap_')) errors.push('Invalid ID format');
+        if (!passport.signature) errors.push('Missing signature');
+        if (new Date(passport.expiresAt) <= new Date()) errors.push('Passport expired');
+
+        const isValid = errors.length === 0;
+        const stampClass = isValid ? 'verified' : 'rejected';
+        const stampText = isValid ? '✓ Verified' : '✗ Invalid';
+
+        result.innerHTML = `
+          <div class="passport-card">
+            <div class="header">
+              <h2>PASSPORT</h2>
+              <span class="stamp ${stampClass}">${stampText}</span>
+            </div>
+            <div class="field">
+              <div class="label">ID</div>
+              <div class="value">${esc(passport.id || 'N/A')}</div>
+            </div>
+            <div class="field">
+              <div class="label">Name</div>
+              <div class="value">${esc(passport.name || 'N/A')}</div>
+            </div>
+            <div class="field">
+              <div class="label">Issuer</div>
+              <div class="value">${esc(passport.issuer || 'N/A')}</div>
+            </div>
+            <div class="field">
+              <div class="label">Endpoint</div>
+              <div class="value">${esc(passport.endpoint || 'N/A')}</div>
+            </div>
+            <div class="field">
+              <div class="label">Public Key</div>
+              <div class="value">${esc((passport.publicKey || '').slice(0, 32))}...</div>
+            </div>
+            <div class="field">
+              <div class="label">Capabilities</div>
+              <div class="capabilities">
+                ${(passport.capabilities || []).map(c => `<span class="cap-tag">${esc(c)}</span>`).join('')}
+                ${(passport.capabilities || []).length === 0 ? '<span style="color: #666">none</span>' : ''}
+              </div>
+            </div>
+            <div class="field">
+              <div class="label">Issued</div>
+              <div class="value">${esc(passport.issuedAt || 'N/A')}</div>
+            </div>
+            <div class="field">
+              <div class="label">Expires</div>
+              <div class="value">${esc(passport.expiresAt || 'N/A')}</div>
+            </div>
+            <div class="field">
+              <div class="label">Attestations</div>
+              <div class="value">${(passport.attestations || []).length}</div>
+            </div>
+            ${errors.length > 0 ? `<div class="error">${errors.map(e => '✗ ' + esc(e)).join('<br>')}</div>` : ''}
+          </div>
+        `;
+      } catch (e) {
+        result.innerHTML = `<div class="error">✗ Failed to fetch passport: ${esc(e.message)}</div>`;
+      }
+    }
+
+    function esc(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    document.getElementById('url').addEventListener('keydown', e => {
+      if (e.key === 'Enter') inspect();
+    });
+  </script>
+</body>
+</html>
